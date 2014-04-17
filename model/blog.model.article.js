@@ -51,10 +51,14 @@ var add = exports.add = function (options, callback) {
 }
 
 var findById = exports.findById = function (id, callback) {
-  ArticleModel.findOne({ _id: id }, function (err, doc) {
-    callback(null, doc);
-  });
+  ArticleModel
+    .find({ _id: id })
+    .populate({ path: 'class' })
+    .exec(function (err, docs) {
+      callback(err, docs.length > 0 ? docs[0] : {});
+    });
 }
+
 
 var removeById = exports.removeById = function (id, callback) {
   ArticleModel.remove({ _id: id }, function (err, count) {
@@ -62,25 +66,18 @@ var removeById = exports.removeById = function (id, callback) {
   });
 }
 
-var query = exports.query = function (skip, limit, callback) {
+var query = exports.query = function (condition, skip, limit, callback) {
+  !condition && (condition = {});
   ArticleModel
-    .find()
+    .find(condition)
     .sort('-modifyDate')
     .skip(skip)
     .limit(limit)
     .populate({ path: 'class' })
     .exec(function (error, docs) {
-      callback && callback(error, docs);
+      ArticleModel.count(condition, function (error, count) {
+        callback && callback(error, docs, count);
+      });
     });
-
-
-  //ArticleModel
-  //  .aggregate()
-  //  .sort('-modifyDate')
-  //  .skip(skipcount)
-  //  .populate('classId')
-  //  .exec(function (error, docs) {
-  //    callback && callback(err, docs);
-  //  });
 }
 

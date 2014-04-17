@@ -1,108 +1,112 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>文章</title>
-    <link href="/public/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/public/stylesheets/blog.css" rel="stylesheet" />
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>文章</title>
+  <link href="/public/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/public/stylesheets/blog.css" rel="stylesheet" />
+  <!-- Just for debugging purposes. Don't actually copy this line! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
          <![endif]-->
 
 </head>
 <body>
-    <%- include ./master/header.html%>
+  <%- include ./master/header.html%>
     <div class="container">
 
-        <div class="blog-header">
-            <h1 class="blog-title">守夜人</h1>
-            <p class="lead blog-description">我将生命与荣耀献于守夜人，今夜如此，夜夜皆然。</p>
-        </div>
+      <%-include ./master/banner.html%>
 
-        <div class="row">
+      <div class="row">
 
-            <div class="col-sm-9 blog-main">
-                <%for (var i=0;i< data.length; i++) {%>
+        <div class="col-sm-9 blog-main">
+          <%for (var i=0;i< data.length; i++) {%>
                 <%var  article=data[i] %>
           
              <div class="blog-post">
-                 <h2 class="blog-post-title">
-                     <a href="/article/<%=article._id%>" target="_blank"><%=article.title %></a></h2>
+               <h2 class="blog-post-title">
+                 <a href="/article/<%=article._id%>" target="_blank"><%=article.title %></a></h2>
 
-                 <ul class="blog-link-left">
-                     <li><%=article.vcreateDate %></li>
-                     <li>by</li>
-                     <li>
-                         <a href="javascript:void(0)"><%=article.author %></a>
-                     </li>
-                     <li>
-                         <a href="javascript:void(0)"><%= ( article.class[0] ?article.class[0].name:'') %>
-                         </a>
-                     </li>
-                 </ul>
+               <ul class="blog-link-left">
+                 <li><%=article.vcreateDate %></li>
+                 <li>by</li>
+                 <li>
+                   <a href="javascript:void(0)"><%=article.author %></a>
+                 </li>
+                 <li>
+                   <a href="javascript:void(0)"><%= ( article.class[0] ?article.class[0].name:'') %>
+                   </a>
+                 </li>
+               </ul>
 
-                 <%=article.content %>
+               <%=article.content %>
                     
             <ul class="blog-link-right">
 
-                <li>
-                    <a href="javascript:void(0)">阅读(<%=article.readQty%>)</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">回复(<%=article.postQty%>)</a>
-                </li>
-                <li>
-                    <a href="/article/<%=article._id%>" target="_blank">全文</a>
-                </li>
+              <li>
+                <a href="javascript:void(0)">阅读(<%=article.readQty%>)</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">回复(<%=article.postQty%>)</a>
+              </li>
+              <li>
+                <a href="/article/<%=article._id%>" target="_blank">全文</a>
+              </li>
             </ul>
-                 <hr class="blog-post-end" />
+               <hr class="blog-post-end" />
              </div>
-                <%}%>
+          <%}%>
 
           <ul class="pager">
-              <li>
-                  <a href="#">上一页</a>
+            <%if(this.p>1 && this.s>3) {%>
+               <li>
+              <a href="#">上一页</a>
               </li>
-              <li>
-                  <a href="#">1</a>
-              </li>
-              <li>
-                  <a href="#">2</a>
-              </li>
-              <li>
-                  <a href="#">3</a>
-              </li>
-              <li>
-                  <a href="#">...</a>
-              </li>
-              <li>
-                  <a href="#">10</a>
-              </li>
-              <li>
-                  <a href="#">下一页</a>
-              </li>
+            <%}%>
+
+            <li>
+              <a href="#"></a>
+            </li>
+            
+            <li>
+              <a href="#">1</a>
+            </li>
+            <li>
+              <a href="#">2</a>
+            </li>
+            <li>
+              <a href="#">3</a>
+            </li>
+            <li>
+              <a href="#">...</a>
+            </li>
+            <li>
+              <a href="#">10</a>
+            </li>
+            <li>
+              <a href="#">下一页</a>
+            </li>
           </ul>
 
-            </div>
-            <!-- /.blog-main -->
+        </div>
+        <!-- /.blog-main -->
 
-            <%-include ./master/description.html %>
+        <%-include ./master/sidebar.html %>
             <!-- /.blog-sidebar -->
 
-        </div>
-        <!-- /.row -->
+      </div>
+      <!-- /.row -->
 
     </div>
-    <!-- /.container -->
-    <%- include ./master/footer.html %>
+  <!-- /.container -->
+  <%- include ./master/footer.html %>
 </body>
 </html>

@@ -23,11 +23,11 @@ var get = exports.get = function (key, callback) {
     if (data && data[key]) {
       callback && callback(error, data[key]);
     }
-    //缓存失效或者不存在返回null
+      //缓存失效或者不存在返回null
     else {
       callback && callback(error, null);
     }
-    
+
   });
 }
 

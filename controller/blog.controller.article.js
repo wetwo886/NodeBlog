@@ -61,13 +61,13 @@ var query = exports.query = function (pageIndex, pageSize, callback) {
   //});
 
   var skip = (pageIndex - 1) * pageSize;
-  Article.query(skip, pageSize, function (error, docs) {
+  Article.query({},skip, pageSize, function (error, docs,count) {
     if (error) {
       logHelper.record(error, 'blog.controller.article');
-      callback && callback(error, {});
+      callback && callback(error, {},0);
     }
     else {
-      callback && callback(null, docs);
+      callback && callback(null, docs, count);
     }
   });
 }
