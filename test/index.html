@@ -1,0 +1,31 @@
+﻿<html>
+<head>
+    <title></title>
+    <script src="../public/javascripts/common/define.js"></script>
+    <script type="text/ecmascript">
+        var ClassA = define({
+            p1: 1,
+            p2: 3,
+            get: function () {
+                console.log(this.p1 + this.p2);
+            }
+        });
+
+        var ClassB = define({
+            p1: 3,
+            get: function () {
+                this.base.get.call(this);
+            }
+        }, ClassA);
+
+        var cb = new ClassB();
+        cb.get();
+
+    </script>
+</head>
+<body>
+
+    <script src="../public/javascripts/lib/require.js"></script>
+    <script src="../public/javascripts/desktop/main.js"></script>
+</body>
+</html>

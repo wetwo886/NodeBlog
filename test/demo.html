@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+
+    <script type="text/javascript" >
+        var start, end;
+        var data=[];
+
+        var t = new Date();
+        var n = 100000, arr = [];
+        for (var i = 0; i < n; i++) {
+            arr.push(i + 1);
+        }
+        var num1 = arr.splice(Math.floor(Math.random() * arr.length), 1);
+        var num2 = arr.splice(Math.floor(Math.random() * arr.length), 1);
+        document.write('随机抽掉两个数：' + num1 + ' 和 ' + num2 + '<br/>');
+        arr.sort(function () { return Math.random() > 0.6 });
+
+        var map = [];
+
+        for (var i = 0; i < arr.length; i++) {
+            map[arr[i]] = 1;
+        }
+            
+        var result=[];
+        for (var i = 0; i < map.length; i++) {
+            if (!map[i]) {
+                result.push(i);
+            }
+        }
+        t = new Date() - t;
+
+        document.write('找到的两个数是：' + result + '<br/><br/>');
+        document.write('寻找两数时间是：' + t + '毫秒');
+
+
+    </script>
+
+</body>
+</html>
