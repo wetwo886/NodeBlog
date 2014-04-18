@@ -1,15 +1,15 @@
 ﻿<div class="col-sm-3 blog-sidebar">
                 <div class="sidebar-module sidebar-module-inset" style="font-size: 12px">
-                   <%=description.description%>
+                   <%=sidebar.description%>
                 </div>
 
                 <div class="sidebar-module sidebar-module-inset">
                     <h4>分类</h4>
                     <ol class="list-unstyled">
-                      <% for (var i=0; i<description.articleClass.length; i++) {%>
+                      <% for (var i=0; i<sidebar.articleClass.length; i++) {%>
                     
                          <li>
-                            <a href="/class/<%=description.articleClass[i].name%>" target="_blank"><%=description.articleClass[i].name%></a>
+                            <a href="/class/<%=sidebar.articleClass[i].name%>" target="_blank"><%=sidebar.articleClass[i].name%></a>
                         </li>
                       <%}%>
                     </ol>
@@ -19,9 +19,9 @@
                 <div class="sidebar-module sidebar-module-inset">
                     <h4>档案</h4>
                     <ol class="list-unstyled">
-                      <%for(var i=0;i<description.archive.length;i++){%>
+                      <%for(var i=0;i<sidebar.archive.length;i++){%>
                         <li>
-                            <a href="#"><%=description.archive[i].month%>(<%=description.archive[i].count%>)</a>
+                            <a href="#"><%=sidebar.archive[i].month%>(<%=sidebar.archive[i].count%>)</a>
                         </li>
                         <%}%>
                     </ol>

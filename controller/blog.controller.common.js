@@ -2,8 +2,8 @@
 var commonModel = require('../model/blog.model.common');
 var logHelper = require('../common/log.helper');
 
-var getDescription = exports.getDescription = function (callback) {
-  commonModel.getDescription(function (data) {
+var getSidebar = exports.getSidebar = function (callback) {
+  commonModel.getSidebar(function (data) {
     callback && callback(data);
   });
 }

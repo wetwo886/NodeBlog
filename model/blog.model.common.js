@@ -11,14 +11,14 @@ var Sync = require('../common/sync');
 //缓存标志
 var CACHEKEY = {
   //描述
-  DESCRIPTION: 'DESCRIPTION'
+  SIDEBAR: 'SIDEBAR'
 }
 
 /// <summary>获取描述，如果存在缓存则直接从缓存中获取，否则从数据库中获取并更新缓存</summary>
 /// <param name="callback" type="Function">回调函数</param>
-var getDescription = exports.getDescription = function (callback) {
+var getDescription = exports.getSidebar = function (callback) {
   //获取缓存
-  Cache.get(CACHEKEY.DESCRIPTION, function (error, data) {
+  Cache.get(CACHEKEY.SIDEBAR, function (error, data) {
     //存在缓存
     if (data) {
       callback && callback(data);
@@ -55,7 +55,7 @@ var getDescription = exports.getDescription = function (callback) {
     //初始化任务队列
     var sync = new Sync([loadDespotion, loadArticleClass, loadArchive], function () {
       //设置缓存
-      Cache.set(CACHEKEY.DESCRIPTION, data);
+      Cache.set(CACHEKEY.SIDEBAR, data);
       callback && callback(data);
     });
     //执行队列

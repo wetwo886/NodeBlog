@@ -19,7 +19,8 @@ var ArticleSchema = new Schema({
   'postQty': Number,
   'class': [{ type: Number, ref: 'ArticleClass' }],
   'createDate': Date,
-  'modifyDate': Date
+  'modifyDate': Date,
+  'urlkey': String
 }, { collection: collectionName });
 
 

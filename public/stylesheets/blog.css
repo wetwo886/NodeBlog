@@ -140,6 +140,10 @@ h6, .h6 {
     }
 
 
+       .pager  .paget_active  > a {
+            background-color:#e5e5e5;
+        }
+
 /*
  * Blog posts
  */
@@ -203,7 +207,7 @@ h6, .h6 {
     .blog-link-left li {
         display: inline;
         margin-right: 5px;
-        color:#999;
+        color: #999;
     }
 
         .blog-link-left li a {
@@ -220,7 +224,7 @@ h6, .h6 {
     .blog-link-right li {
         display: inline;
         margin-left: 5px;
-        color:#999;
+        color: #999;
     }
 
         .blog-link-right li a {

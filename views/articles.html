@@ -58,7 +58,8 @@
                 <a href="javascript:void(0)">回复(<%=article.postQty%>)</a>
               </li>
               <li>
-                <a href="/article/<%=article._id%>" target="_blank">全文</a>
+                  
+                <a href="<%=detailUrl(article._id)%>" target="_blank">全文</a>
               </li>
             </ul>
                <hr class="blog-post-end" />
@@ -66,18 +67,15 @@
           <%}%>
 
           <ul class="pager">
-            <%if(this.p>1 && this.s>3) {%>
+         
+            <% if(page.p>1 && page.count>3) {%>
                <li>
               <a href="#">上一页</a>
               </li>
             <%}%>
 
-            <li>
-              <a href="#"></a>
-            </li>
-            
-            <li>
-              <a href="#">1</a>
+            <li class="paget_active">
+              <a href="#"  >1</a>
             </li>
             <li>
               <a href="#">2</a>

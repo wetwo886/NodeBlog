@@ -1,26 +1,68 @@
-﻿
+﻿//@description    文章相关路由控制
+//@author         wetwo886
+
+//文章控制器
 var ArticleController = require('../controller/blog.controller.article');
+//通用控制器
 var CommonController = require('../controller/blog.controller.common');
+//获取route配置
+var route = require('./config');
+//获取模板配置
+var viewTemplates = route.getViewTemplates();
 
+/// <summary>列表路由</summary>
+/// <param name="req" type="Object">请求参数</param>
+/// <param name="res" type="Object">响应对象</param>
 exports.list = function (req, res) {
-  var pageIndex = (!req.params.p && 1);
-  var pageSize = (!req.params.s && 20);
-
+  //默认页码，页大小
+  var pageSize = 20, pageIndex = 1;
+  //获取参数中的页大小，页码书卷
+  if (req.params.length === 2) {
+    var pageSize = req.params[0];
+    var pageIndex = req.params[1];
+  }
+  //页码大于20，设置为20
+  if (pageSize > 20) {
+    pageSize = 20;
+  }
+  //获取数据
   ArticleController.query(pageIndex, pageSize, function (error, docs, count) {
-    CommonController.getDescription(function (des) {
-      res.render('article.html', { data: docs, description: des, count: count, p: pageIndex, s: pageSize });
+    //获取Sidebar数据
+    CommonController.getSidebar(function (des) {
+      //渲染页面
+      res.render(viewTemplates.articles,
+        {
+          data: docs,
+          sidebar: des,
+          page: { count: count, p: pageIndex, s: pageSize },
+          detailUrlFun: route.getArticleUrl,
+          listUrlFun: route.getArticleListUrl
+        });
     });
   });
 };
 
-
-
+/// <summary>详情页</summary>
+/// <param name="req" type="Object">请求参数</param>
+/// <param name="res" type="Object">响应对象</param>
 exports.detail = function (req, res) {
-  ArticleController.findById(req.params.id, function (doc) {
-    CommonController.getDescription(function (des) {
-      res.render('detail.html', { data: doc, description: des });
+  //获取数据
+  ArticleController.findById(req.params[0], function (doc) {
+    //获取Sidebar数据
+    CommonController.getSidebar(function (des) {
+      //渲染页面
+      res.render(viewTemplates.detail, { data: doc, description: des });
     });
 
+  });
+}
+
+
+/// <summary>获取sidebar数据</summary>
+var getSidebar = function (callback) {
+  CommonController.getSidebar(function (data) {
+    //渲染页面
+    callback && callback(data);
   });
 }
 
