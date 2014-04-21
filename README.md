@@ -1,4 +1,2 @@
-NodeBlog
-========
-
-blog with nodejs、mongoDB
+### NodeBlog
+	采用nodeJs、mongoDb搭建的blog系统，正在完善中....
