@@ -1,80 +1,71 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>文章</title>
-  <link href="/public/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="/public/stylesheets/blog.css" rel="stylesheet" />
-  <!-- Just for debugging purposes. Don't actually copy this line! -->
-  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-         <![endif]-->
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>文章列表</title>
+    <%include ./master/res.html%>
 </head>
 <body>
-  <%- include ./master/header.html%>
+    <%- include ./master/header.html%>
     <div class="container">
-
-      <%-include ./master/banner.html%>
-
+        <%-include ./master/banner.html%>
       <div class="row">
-
-        <div class="col-sm-9 blog-main">
-          <%for (var i=0;i< data.length; i++) {%>
+          <div class="col-sm-9 blog-main">
+              <%for (var i=0;i< data.length; i++) {%>
                 <%var  article=data[i] %>
           
              <div class="blog-post">
-               <h2 class="blog-post-title">
-                 <a href="/article/<%=article._id%>" target="_blank"><%=article.title %></a></h2>
+                 <h2 class="blog-post-title">
+                     <a href="<%=detailUrlFun(article._id)%>" target="_blank"><%=article.title %></a></h2>
 
-               <ul class="blog-link-left">
-                 <li><%=article.vcreateDate %></li>
-                 <li>by</li>
-                 <li>
-                   <a href="javascript:void(0)"><%=article.author %></a>
-                 </li>
-                 <li>
-                   <a href="javascript:void(0)"><%= ( article.class[0] ?article.class[0].name:'') %>
-                   </a>
-                 </li>
-               </ul>
+                 <ul class="blog-link-left">
+                     <li><%=article.vcreateDate %></li>
+                     <li>by</li>
+                     <li><%=article.author %>
+                     </li>
+                     <li><%= ( article.class[0] ?article.class[0].name:'') %>
+                        
+                     </li>
+                 </ul>
 
-               <%=article.content %>
+                 <%=article.content %>
                     
             <ul class="blog-link-right">
 
-              <li>
-                <a href="javascript:void(0)">阅读(<%=article.readQty%>)</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">回复(<%=article.postQty%>)</a>
-              </li>
-              <li>
-                  
-                <a href="<%=detailUrl(article._id)%>" target="_blank">全文</a>
-              </li>
+                <li>阅读(<%=article.readQty%>)
+                </li>
+                <li>回复(<%=article.postQty%>)
+                </li>
+                <li>
+
+                    <a href="<%=detailUrlFun(article._id)%>" target="_blank">全文</a>
+                </li>
             </ul>
-               <hr class="blog-post-end" />
+                 <hr class="blog-post-end" />
              </div>
-          <%}%>
+              <%}%>
 
           <ul class="pager">
-         
-            <% if(page.p>1 && page.count>3) {%>
+              <% if(page.p>1 && page.count>1) {%>
                <li>
-              <a href="#">上一页</a>
-              </li>
-            <%}%>
+                   <a href="<%=listUrlFun(page.p-1,page.s)%>">上一页</a>
+               </li>
+              <%}%>
 
-            <li class="paget_active">
+            <% if (page.p < page.count  && page.count>1 ){%>
+                <li>
+
+                    <a href="<%=listUrlFun(page.p+1,page.s)%>">下一页</a>
+                </li>
+              <%}%>
+              
+
+
+ <!--           <li class="paget_active">
               <a href="#"  >1</a>
             </li>
             <li>
@@ -92,19 +83,19 @@
             <li>
               <a href="#">下一页</a>
             </li>
-          </ul>
+          </ul>-->
+          </div>
+          <!-- /.blog-main -->
 
-        </div>
-        <!-- /.blog-main -->
-
-        <%-include ./master/sidebar.html %>
+          <%-include ./master/sidebar.html %>
             <!-- /.blog-sidebar -->
 
       </div>
-      <!-- /.row -->
+        <!-- /.row -->
 
     </div>
-  <!-- /.container -->
-  <%- include ./master/footer.html %>
+    <!-- /.container -->
+    <%- include ./master/footer.html %>
+    <% include ./master/js.html%>
 </body>
 </html>

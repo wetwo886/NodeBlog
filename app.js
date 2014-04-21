@@ -7,7 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var config = require('./config');
-var route = require('./routes/config');
+var handler = require('./routes/handler');
 
 
 var app = express();
@@ -32,7 +32,7 @@ app.use('/public', express.static(__dirname + '/public', { maxAge: 3600000 * 24 
 
 
 //ÉèÖÃÂ·ÓÉ
-route.setRule(app);
+handler.setRule(app);
 
 // development only
 if ('development' == app.get('env')) {
